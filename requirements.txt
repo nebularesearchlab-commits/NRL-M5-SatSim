@@ -1,0 +1,32 @@
+# -----------------------------------------------------------------------------
+# CAS 502: Drone firmware & M5 diagnostic simulation
+# Technological networks from real firmware metadata — coordination and
+# resilience in mind. This file pins the few libraries the pipeline needs so
+# anyone can reproduce the same environment and reason about the results.
+# -----------------------------------------------------------------------------
+
+# Turning structure into numbers we can compare and interpret.
+# Used for graph metrics, random seeds, and array operations across the pipeline.
+numpy>=1.20,<3
+
+# Tables and metadata in a form that’s easy to inspect and share.
+# Parser outputs and M5 inputs/outputs live here.
+pandas>=1.3,<3
+
+# The backbone of the M5 protocol: graphs as nodes and edges, with metrics
+# (degree, betweenness, path length, efficiency) that reflect how connected
+# and central each part of the system is.
+networkx>=3.0,<4
+
+# Finding natural clusters in the network so we can compress the graph
+# without losing the roles that matter for coordination.
+python-louvain>=0.16
+
+# Sparse graphs and connectivity checks when the network grows.
+# Keeps computation grounded when we scale beyond small examples.
+scipy>=1.7,<2
+
+# Clear, reproducible figures: the firmware-derived network and M5 metrics
+# in a form that invites discussion rather than raw tables alone.
+matplotlib>=3.4,<4
+seaborn>=0.11,<1

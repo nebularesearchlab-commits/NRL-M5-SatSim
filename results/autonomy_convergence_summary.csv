@@ -1,0 +1,10 @@
+field,value
+converged,False
+decision,
+rounds,200
+rho_mean,0.9160213675213675
+rho_min,0.125
+rho_max,1.0
+q_mean,0.02078585837410737
+x_mean,0.020232075554788852
+x_std,0.16331761170233827

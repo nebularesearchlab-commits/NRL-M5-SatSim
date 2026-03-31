@@ -1,0 +1,6 @@
+metric,full_network,compressed_network
+global_efficiency,0.09760562769808517,0.2846139148915677
+avg_path_length,inf,inf
+modularity,0.9022723827569561,
+lcc_fraction,0.9753333333333334,
+compression_ratio,9.23076923076923,

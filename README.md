@@ -1,0 +1,42 @@
+# NRL-M5 Paper Minimal Repro Bundle
+
+This bundle contains only the files needed to inspect paper evidence and
+reproduce paper-facing outputs.
+
+## Folder layout
+
+- `paper/` manuscript sources (`main.tex` and synchronized markdown copy)
+- `docs/` provenance and reproducibility notes
+- `src/` validation, graph-construction, and rerun scripts
+- `notebooks/` runnable notebook driver for paper outputs
+- `data/raw/` canonical raw JSON inputs
+- `data/processed/` deterministic graph artifacts
+- `results/` exported tables and run config used by the paper
+
+## Quick start (paper outputs from existing artifacts)
+
+1. Install dependencies:
+   `pip install -r requirements.txt`
+2. Open and run:
+   `notebooks/Satellite_M5_Rerun.ipynb`
+3. Default notebook mode:
+   - loads `results/*.csv`
+   - regenerates paper figures under `results/figures/`
+   - performs artifact integrity checks
+
+## Optional full rerun
+
+The notebook includes an optional full-rerun cell (`RUN_FULL_PIPELINE = True`)
+that executes:
+
+1. `python3 src/validate_dataset.py --input-dir data/raw`
+2. `python3 src/build_graph.py --input-dir data/raw --output-dir data/processed --k-neighbors 6 --max-nodes 3000`
+3. `python3 src/run_satellite_rerun.py --graph-metadata data/processed/graph_metadata.json --results-dir results --betweenness-samples 200 --alpha 0.1 --theta-var 0.01 --theta-agree 0.8 --k-stable 5 --max-steps 200`
+
+## Notes
+
+- Outputs are reported as observed, including non-convergence when present.
+- This package supports methods reproducibility and does not claim flight
+  validation.
+- `m5_autonomy.py` is kept at bundle root because `src/run_satellite_rerun.py`
+  imports it from the workspace root.

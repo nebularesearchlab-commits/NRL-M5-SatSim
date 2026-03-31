@@ -1,0 +1,21 @@
+{
+  "graph_rule": "kNN normalized orbital feature graph",
+  "labeling": {
+    "raw_data": "empirical snapshot inputs",
+    "edges": "notional coordination topology",
+    "outputs": "simulated protocol outputs"
+  },
+  "feature_columns": [
+    "MEAN_MOTION",
+    "INCLINATION",
+    "RA_OF_ASC_NODE",
+    "MEAN_ANOMALY",
+    "ECCENTRICITY"
+  ],
+  "k_neighbors": 6,
+  "node_count": 3000,
+  "edge_count": 11990,
+  "graph_signature_sha256": "379e28fdce5813b977a4ea1ae04873a2f56256b0dd3e13e84cb5d385327ec025",
+  "nodes_csv": "data/processed/graph_nodes.csv",
+  "edges_csv": "data/processed/graph_edges.csv"
+}

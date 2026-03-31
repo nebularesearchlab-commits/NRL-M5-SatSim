@@ -1,0 +1,16 @@
+{
+  "generated_utc": "2026-03-30T18:21:32.955979+00:00",
+  "autonomy_config": {
+    "alpha": 0.1,
+    "theta_var": 0.01,
+    "theta_agree": 0.8,
+    "K_stable": 5,
+    "theta_high": 0.9,
+    "theta_low": 0.5,
+    "use_synergy_gate": false,
+    "max_steps": 200
+  },
+  "runtime_seconds": 140.21156477928162,
+  "notes": "Regular and Enhanced run on same graph for parity.",
+  "autonomy_config_hash_sha256": "330e040ec900889345eea2b714f8d5b345a3f68c5d18c548c159ae17a6c2f1f3"
+}
