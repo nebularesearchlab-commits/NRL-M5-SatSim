@@ -6,6 +6,10 @@ Nebula Research Lab \\
 \texttt{dtangap@asu.edu}}
 \date{}
 \maketitle
+\noindent\textbf{Affiliated Advisers:}\\
+Venture Advisor: Shelli Brunswick\\
+Academia Advisor: Gennady Shekar\\
+Defense Advisor: Robi Sen
 \noindent\textbf{Header line (template field / footer):} For submission to the Small Satellite Conference ecosystem (SSC26) -- 40th Annual Small Satellite Conference, August 23--26, 2026, Salt Lake City, UT.
 \noindent\textbf{Keywords:} Planetary observation; autonomous satellite coordination; distributed space systems; multi-satellite sensing; k-nearest-neighbor graph; graph-based autonomy; structural parity; bounded-horizon non-convergence; autonomy calibration.
 
