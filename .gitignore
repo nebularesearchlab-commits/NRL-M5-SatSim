@@ -1,0 +1,32 @@
+# Python cache and bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Jupyter checkpoints and runtime files
+.ipynb_checkpoints/
+*.nbconvert.ipynb
+
+# Local environment and secrets
+.env
+.env.*
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Test/coverage caches
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# Keep generated paper figures versioned for reproducibility.
+# Do not ignore results/figures/*.png

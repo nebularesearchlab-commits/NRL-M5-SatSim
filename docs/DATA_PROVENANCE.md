@@ -12,9 +12,9 @@ Nebula SSC26 satellite rerun package.
 
 | File | Current path | Observed format | Label |
 |------|--------------|-----------------|-------|
-| Iridium Next.json | `Dataset/Iridium Next.json` | JSON array of orbital-element records | Empirical orbital catalog data snapshot |
-| OneWeb.json | `Dataset/OneWeb.json` | JSON array of orbital-element records | Empirical orbital catalog data snapshot |
-| Starlink.json | `Dataset/Starlink.json` | JSON array of orbital-element records | Empirical orbital catalog data snapshot |
+| Iridium Next.json | `data/raw/Iridium Next.json` | JSON array of orbital-element records | Empirical orbital catalog data snapshot |
+| OneWeb.json | `data/raw/OneWeb.json` | JSON array of orbital-element records | Empirical orbital catalog data snapshot |
+| Starlink.json | `data/raw/Starlink.json` | JSON array of orbital-element records | Empirical orbital catalog data snapshot |
 
 ## Retrieval/source metadata
 
@@ -135,12 +135,16 @@ Recommended source-platform reference anchor for the paper:
 - CelesTrak, "Current GP Element Sets," `https://celestrak.org/NORAD/elements/`
   with constellation-specific JSON endpoints used for `Iridium NEXT`,
   `OneWeb`, and `Starlink`.
+- GitHub repository archive for this reproducibility package:
+  `https://github.com/nebularesearchlab-commits/NRL-M5-SatSim`
+- Graphical visual database outputs are generated into:
+  `results/figures/*.png`
 
 ## Handling policy
 
-1. Keep raw inputs immutable in `satellite-rerun-ssc26/data_raw/`.
+1. Keep raw inputs immutable in `data/raw/`.
 2. Perform all transformations via scripts only (no manual record edits).
-3. Save deterministic processed outputs to `satellite-rerun-ssc26/data_processed/`.
+3. Save deterministic processed outputs to `data/processed/`.
 4. Record any data refresh in this file with new UTC timestamp and source.
 
 ## Integrity checks required per run

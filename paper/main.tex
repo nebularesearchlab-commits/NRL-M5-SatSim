@@ -4,6 +4,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{times}
 \usepackage{amsmath,amssymb}
+\usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{url}
 \usepackage{enumitem}
@@ -11,9 +12,6 @@
 \usepackage{multicol}
 \usepackage{fancyhdr}
 \usepackage{caption}
-\usepackage{pgfplots}
-\usepackage{tikz}
-\pgfplotsset{compat=1.18}
 
 % -------------------------------------------------------------------------
 % Conference heading rules: all-caps primary sections and bold-italic
@@ -58,8 +56,10 @@
 {\fontsize{12}{14}\selectfont\bfseries Autonomous Satellite Coordination for Planetary Observation: Structural Parity and Bounded-Horizon Non-Convergence\par}
 \vspace{0.5cm}
 {\small Derick F. Tangap\par}
+{\small M.S. Student, Complex Systems Science\par}
+{\small Rob Walton College of Global Futures, Arizona State University\par}
 {\small Nebula Research Lab\par}
-{\small nebularesearchlab@gmail.com\par}
+{\small \texttt{dtangap@asu.edu}\par}
 \end{center}
 
 
@@ -100,7 +100,7 @@ The central manuscript objective is therefore narrow and publishable: document a
 
 The main contributions are as follows:
 
-\begin{itemize}[leftmargin=*]
+\begin{itemize}
 \item A reproducible graph-based simulation pipeline grounded in empirical orbital snapshots and explicit artifact logging.
 \item A parity result showing that Regular and Enhanced pipelines produce identical structural outputs on the same graph instance.
 \item A bounded-horizon autonomy result showing non-convergence despite high local agreement under declared stopping criteria.
@@ -130,9 +130,9 @@ This body of work is especially close to the present paper because the main beha
 
 Work on spacecraft swarms and distributed satellite autonomy provides important motivation, but it must be used carefully. This paper uses flight and operations literature strictly as context, not as validation of the present graph abstraction.
 
-\begin{itemize}[leftmargin=*]
+\begin{itemize}
 \item The Starling mission is explicitly framed as a technology-development and validation effort for cooperative spacecraft groups, which is useful for situating the current paper's calibration-oriented posture.[1]
-\item Stanford’s navigation research for distributed space systems shows how autonomous tracking, orbit estimation, and inter-satellite bearing-angle processing can be developed as rigorous enabling layers for future multi-spacecraft missions.[13,14]
+\item Stanford's navigation research for distributed space systems shows how autonomous tracking, orbit estimation, and inter-satellite bearing-angle processing can be developed as rigorous enabling layers for future multi-spacecraft missions.[13,14]
 \item Operational constellation-management and automated science-planning systems show that the threshold for deployable autonomy is much higher than structural consistency or local agreement metrics alone.[5,10]
 \end{itemize}
 The shared lesson across these studies is that autonomy in space systems is judged not only by whether a distributed architecture is conceptually attractive, but by whether its decision process can be bounded, verified, and trusted under realistic constraints. That is exactly why the present paper keeps its claim set narrow.
@@ -161,13 +161,13 @@ That requirement is not always foregrounded in graph-coordination or swarm-auton
 
 This study was designed as a computational methods-and-calibration study rather than as a flight-validation experiment. The workflow preserved a three-layer abstraction boundary so that the scientific claim remained narrow and auditable. In application terms, the study did not attempt to model instrument physics, observation quality, or science return directly; instead, it evaluated a coordination substrate that could eventually matter for future autonomous observation architectures.
 
-\textbf{Layer A — empirical orbital-element inputs.}  
+\noindent\textbf{Layer A -- empirical orbital-element inputs.}
 The input layer consisted of publicly distributed orbital-element records stored as JSON catalogs for Iridium Next, OneWeb, and Starlink. These records served as empirical catalog inputs rather than as direct measurements of intersatellite communication behavior. If the source records originated from NORAD GP/TLE-family products, they should be interpreted as mean-element data that are valid only under compatible SGP-family propagation assumptions.[8]
 
-\textbf{Layer B — constructed interaction graph.}  
+\noindent\textbf{Layer B -- constructed interaction graph.}
 The network layer was a declared k-nearest-neighbor (kNN) graph built from orbital-element features. Edges therefore represented a notional coordination topology, not measured crosslinks or validated RF reachability. This distinction was maintained because nearest-neighbor graphs are useful abstractions for local interaction studies, but they do not by themselves establish operational communication realism.[4,6] In the present framing, this graph should be understood as a coordination scaffold that could someday support distributed observation functions such as sensing allocation, measurement synchronization, or bounded retargeting, rather than as a validated representation of any deployed observing system.
 
-\textbf{Layer C — simulated protocol outputs.}  
+\noindent\textbf{Layer C -- simulated protocol outputs.}
 The output layer consisted of software-generated diagnostics, autonomy summaries, and compression metrics produced under fixed code, parameters, and stopping rules. The interpretation of these outputs was therefore limited to properties of the declared model and configuration rather than to flight-qualified autonomy claims. Accordingly, the present outputs should be read as calibration evidence about whether a distributed coordination layer resolves under declared assumptions, not as direct evidence of observation quality, target-detection performance, or mission-level science yield.
 
 
@@ -179,16 +179,16 @@ Each graph node corresponded to one unique \texttt{NORAD\_CAT\_ID}. Preserved no
 
 The present artifact set did not yet record the exact public source URL, retrieval UTC, or license/usage note for each raw catalog file, and these items should be inserted before submission:
 
-\begin{itemize}[leftmargin=*]
-\item \texttt{https://celestrak.org/NORAD/elements/gp.php?GROUP=iridium-NEXT\&FORMAT=json}
-\item \texttt{https://celestrak.org/NORAD/elements/gp.php?GROUP=oneweb\&FORMAT=json}
-\item \texttt{https://celestrak.org/NORAD/elements/gp.php?GROUP=starlink\&FORMAT=json}
-\item Exact local retrieval UTC was not preserved in the current artifact set. During provenance review, the CelesTrak source platform page reported "Current as of 2026 Mar 30 12:22:26 UTC."
+\begin{itemize}
+\item \url{https://celestrak.org/NORAD/elements/gp.php?GROUP=iridium-NEXT&FORMAT=json}
+\item \url{https://celestrak.org/NORAD/elements/gp.php?GROUP=oneweb&FORMAT=json}
+\item \url{https://celestrak.org/NORAD/elements/gp.php?GROUP=starlink&FORMAT=json}
+\item Exact local retrieval UTC was not preserved in the current artifact set. During provenance review, the CelesTrak source platform page reported ``Current as of 2026 Mar 30 12:22:26 UTC.''
 \item CelesTrak redistributes current GP element sets. Final submission should cite CelesTrak as the source platform and verify any additional reuse or attribution language required at the time of submission.
 \end{itemize}
 The processed node artifact preserved record-level \texttt{EPOCH} values for individual objects rather than documenting a single common propagated epoch. The manuscript should therefore state the exact temporal interpretation used in graph construction:
 
-\begin{itemize}[leftmargin=*]
+\begin{itemize}
 \item The graph preserved native record-level catalog epochs as provided in the source snapshots; no separately archived common-epoch propagation step is documented in the current artifact bundle.
 \item This interpretation is supported by \texttt{graph\_nodes.csv}, which stores one \texttt{epoch} value per node, and by the current graph-building implementation, which copies each record's \texttt{EPOCH} field into node metadata. The resulting graph should therefore be interpreted as a coordination scaffold built from snapshot orbital fields rather than from a uniformly propagated common-epoch state.
 \end{itemize}
@@ -202,7 +202,7 @@ For the evaluation reported here, the processed graph metadata recorded \texttt{
 
 Several implementation details remain insufficiently documented in the current artifact bundle and should be stated explicitly in the manuscript rather than left implicit:
 
-\begin{itemize}[leftmargin=*]
+\begin{itemize}
 \item Z-score normalization was applied globally across the merged catalog, not separately by source file.
 \item No explicit secondary manuscript-level tie-break rule is implemented beyond the \texttt{cKDTree} neighbor query; during undirected symmetrization, repeated node pairs are resolved by retaining the minimum distance observed for that pair.
 \item Records were loaded from all JSON catalogs in sorted filename order, deterministically sorted by \texttt{NORAD\_CAT\_ID}, \texttt{OBJECT\_ID}, and \texttt{OBJECT\_NAME}, deduplicated by \texttt{NORAD\_CAT\_ID} while keeping the first post-sort record, and then truncated to the first 3000 records. No separate constellation-balancing rule was applied.
@@ -248,6 +248,7 @@ Average path length was defined by implementation as finite only for connected g
 \subsection{Reproducibility and Transparency Record}
 
 The evaluation was structured as an artifact-driven reproducibility package. Canonical artifacts included the processed graph specification (\texttt{graph\_metadata.json}), processed node and edge tables (\texttt{graph\_nodes.csv}, \texttt{graph\_edges.csv}), run configuration (\texttt{run\_config.json}), structural comparison table (\texttt{regular\_vs\_enhanced\_metrics.csv}), autonomy summary (\texttt{autonomy\_convergence\_summary.csv}), and compression-fidelity table (\texttt{compression\_fidelity\_table.csv}). The graph metadata artifact recorded the graph signature SHA-256 hash, and the run configuration artifact recorded the autonomy-configuration SHA-256 hash \texttt{330e040ec900889345eea2b714f8d5b345a3f68c5d18c548c159ae17a6c2f1f3}.
+The reproducibility package and graphical visual database outputs are distributed through the project repository at \url{https://github.com/nebularesearchlab-commits/NRL-M5-SatSim}, with generated figures stored under \texttt{results/figures/}.
 
 The notebook-based execution record showed the following execution command:
 
@@ -255,7 +256,7 @@ The notebook-based execution record showed the following execution command:
 
 To satisfy the expectations of a fully reproducible Methods section, the manuscript should still add the missing environment and software details:
 
-\begin{itemize}[leftmargin=*]
+\begin{itemize}
 \item Python 3.9+
 \item The archived rerun does not record exact installed versions. The preserved dependency specification is: \texttt{networkx>=3.0,<4}, \texttt{numpy>=1.20,<3}, \texttt{pandas>=1.3,<3}, and \texttt{python-louvain>=0.16}.
 \item No pinned lockfile, environment export, or container reference is currently preserved in the archived artifact bundle.
@@ -291,6 +292,8 @@ converged & False \\
 \end{center}
 
 
+\noindent\textbf{Table 1.} Regular versus Enhanced structural metrics on the identical graph instance.
+
 \begin{table}[t]
 \centering
 \caption{Regular versus Enhanced structural metrics on the identical graph instance.}
@@ -313,29 +316,8 @@ All reported structural metrics matched exactly between the two pipeline variant
 
 \begin{figure}[t]
 \centering
-% Requires \usepackage{pgfplots} and \pgfplotsset{compat=1.18}
-\begin{tikzpicture}
-\begin{axis}[
-    width=0.92\columnwidth,
-    height=0.58\columnwidth,
-    ybar,
-    bar width=8pt,
-    ymin=0,
-    ymax=10,
-    symbolic x coords={Efficiency,Modularity,LCC,Compression},
-    xtick=data,
-    xticklabel style={font=\scriptsize, rotate=20, anchor=east},
-    ylabel={Value},
-    legend style={font=\scriptsize, at={(0.5,1.02)}, anchor=south, legend columns=2},
-    nodes near coords,
-    nodes near coords style={font=\tiny, rotate=90, anchor=west},
-]
-\addplot coordinates {(Efficiency,0.0976056277) (Modularity,0.9022723828) (LCC,0.9753333333) (Compression,9.2307692308)};
-\addplot coordinates {(Efficiency,0.0976056277) (Modularity,0.9022723828) (LCC,0.9753333333) (Compression,9.2307692308)};
-\legend{Regular, Enhanced}
-\end{axis}
-\end{tikzpicture}
-\caption{Parity visualization for the finite reported structural metrics. `avg\_path\_length\_full` is omitted because both runs reported `inf`.}
+\includegraphics[width=0.92\columnwidth]{../results/figures/fig_parity_metrics.png}
+\caption{Parity visualization for the finite reported structural metrics. \texttt{avg\_path\_length\_full} is omitted because both runs reported \texttt{inf}.}
 \label{fig:parity_metrics}
 \end{figure}
 
@@ -344,6 +326,8 @@ All reported structural metrics matched exactly between the two pipeline variant
 
 Under the logged autonomy configuration \texttt{alpha = 0.1}, \texttt{theta\_var = 0.01}, \texttt{theta\_agree = 0.8}, \texttt{K\_stable = 5}, \texttt{theta\_high = 0.9}, \texttt{theta\_low = 0.5}, \texttt{use\_synergy\_gate = false}, and \texttt{max\_steps = 200}, the autonomy layer did not satisfy the convergence criterion within the bounded horizon.
 
+
+\noindent\textbf{Table 2.} Autonomy-layer outcome from the exported convergence summary.
 
 \begin{table}[t]
 \centering
@@ -371,25 +355,8 @@ The exported summary reported \texttt{converged = False} and \texttt{rounds = 20
 
 \begin{figure}[t]
 \centering
-\begin{tikzpicture}
-\begin{axis}[
-    width=0.9\columnwidth,
-    height=0.56\columnwidth,
-    ybar,
-    bar width=10pt,
-    ymin=0,
-    ymax=1.1,
-    symbolic x coords={rho\_min,rho\_mean,rho\_max},
-    xtick=data,
-    xticklabel style={font=\scriptsize},
-    ylabel={Agreement},
-    nodes near coords,
-    nodes near coords style={font=\tiny},
-]
-\addplot coordinates {(rho\_min,0.125) (rho\_mean,0.9160213675) (rho\_max,1.0)};
-\end{axis}
-\end{tikzpicture}
-\caption{Agreement summary from the autonomy-layer export. The run remained non-convergent (`converged = False`) after `200` rounds despite high mean agreement.}
+\includegraphics[width=0.9\columnwidth]{../results/figures/fig_autonomy_agreement.png}
+\caption{Agreement summary from the autonomy-layer export. The run remained non-convergent (\texttt{converged = False}) after \texttt{200} rounds despite high mean agreement.}
 \label{fig:autonomy_agreement}
 \end{figure}
 
@@ -398,6 +365,8 @@ The exported summary reported \texttt{converged = False} and \texttt{rounds = 20
 
 The exported compression table reported a compression ratio of \texttt{9.23076923076923} and provided full-versus-compressed values for the metrics listed below.
 
+
+\noindent\textbf{Table 3.} Full-network versus compressed-network fidelity summary.
 
 \begin{table}[t]
 \centering
@@ -421,25 +390,8 @@ The exported fidelity table reported different \texttt{global\_efficiency} value
 
 \begin{figure}[t]
 \centering
-\begin{tikzpicture}
-\begin{axis}[
-    width=0.78\columnwidth,
-    height=0.52\columnwidth,
-    ybar,
-    bar width=12pt,
-    ymin=0,
-    ymax=0.35,
-    symbolic x coords={Full,Compressed},
-    xtick=data,
-    xticklabel style={font=\scriptsize},
-    ylabel={Global efficiency},
-    nodes near coords,
-    nodes near coords style={font=\tiny},
-]
-\addplot coordinates {(Full,0.0976056277) (Compressed,0.2846139149)};
-\end{axis}
-\end{tikzpicture}
-\caption{Compression-fidelity comparison on the finite metric exported for both representations. `avg\_path\_length` remained `inf` in both cases, while other compressed-network entries were not exported.}
+\includegraphics[width=0.78\columnwidth]{../results/figures/fig_compression_efficiency.png}
+\caption{Compression-fidelity comparison on the finite metric exported for both representations. \texttt{avg\_path\_length} remained \texttt{inf} in both cases, while other compressed-network entries were not exported.}
 \label{fig:compression_efficiency}
 \end{figure}
 
@@ -477,7 +429,7 @@ These limitations clarified, rather than weakened, the next research moves. The 
 
 The most defensible high-level conclusion from this section was therefore narrow: structural stability of the reported pipeline did not imply bounded-horizon decision resolution in the autonomy layer. That statement answered the study objective directly, remained consistent with the cited consensus and collective-decision literature, and avoided upgrading a calibration finding into an operational autonomy claim.
 
-No additional discussion figure was included. The calibration roadmap is summarized in prose as: structural parity established -> bounded-horizon non-convergence observed -> future sensitivity analysis over horizon, thresholds, edge-weight construction, initialization, and graph assumptions.
+No additional discussion figure was included. The calibration roadmap is summarized in prose as: structural parity established $\rightarrow$ bounded-horizon non-convergence observed $\rightarrow$ future sensitivity analysis over horizon, thresholds, edge-weight construction, initialization, and graph assumptions.
 
 
 \section{INDUSTRY IMPLICATIONS}
@@ -494,7 +446,7 @@ For assurance and governance stakeholders, the study reinforced the need for exp
 
 The most defensible industry recommendation from this paper was therefore specific: \textbf{do not automate global coordination decisions from this autonomy layer until convergence is reproduced under declared horizons, stress-tested across controlled evaluations, and tied to explicit operational safety gates}. Under the current evidence, the autonomy layer was best treated as a calibration instrument that could inform engineering judgment without yet carrying independent decision authority. For planetary-observation and remote-sensing programs, that means the near-term value lies in advisory support for bounded targeting or scheduling experiments rather than autonomous control of mission-level observation decisions. Short term, that meant advisory and shadow-mode use; medium term, it meant bounded-horizon sensitivity studies tied to mission-relevant failure cases; long term, it meant considering greater authority only after reproducible convergence and assurance evidence had been established.
 
-No additional industry-facing figure was included. The staged adoption logic is summarized in prose as: calibration -> advisory or shadow-mode use -> gated operational use only after reproducible convergence evidence and assurance review.
+No additional industry-facing figure was included. The staged adoption logic is summarized in prose as: calibration $\rightarrow$ advisory or shadow-mode use $\rightarrow$ gated operational use only after reproducible convergence evidence and assurance review.
 
 
 \section{CONCLUSIONS}
@@ -504,12 +456,12 @@ This study answered its central question in a deliberately narrow way. The repor
 That conclusion matters because it gives the field a cleaner next step. Planetary observation increasingly depends on distributed and adaptive architectures, but those architectures require coordination layers that can be audited before they can be trusted. The appropriate response to the present result is therefore neither to claim operational autonomous observation nor to discard the framework, but to use the same artifact-governed workflow to map convergence regimes more carefully. Future calibration studies should vary stopping horizons, threshold rules, graph-construction assumptions, initialization choices, and autonomy-update settings while preserving the reproducibility discipline established here, and then connect those calibrated dynamics to controlled observation-oriented proxy tasks such as retargeting or scheduling. If those follow-on studies succeed, this framework may mature into a stronger basis for autonomy assessment in future planetary-observation architectures; if they continue to expose non-convergent regimes, that outcome will remain scientifically valuable because it defines the operating boundaries of the model rather than hiding them.
 
 
-\section{ACKNOWLEDGMENTS}
+\section*{ACKNOWLEDGMENTS}
 
 The author gratefully acknowledges Nebula Research Lab Advisors, Shelli Brunswick for her valuable contributions and thoughtful guidance while advising Nebula Research Lab towards the venture capital sector. The author also thanks Gennady Shenker for his sustained guidance and deep commercial knowledge, which helped advance this line of research into an academic context. In addition, the author acknowledges Robi Sen for his insightful perspective on defense-industry considerations relevant to the broader framing of this work. The collective support and expertise of these individuals helped shape the development of the research presented in this paper.
 
-\section{References}
-\begin{enumerate}[leftmargin=*]
+\section{REFERENCES}
+\begin{enumerate}
 \item Kruger, J., Hwang, S., and D'Amico, S., "Starling Formation-Flying Optical Experiment: Initial Operations and Flight Results," \emph{Proceedings of the 38th Annual AIAA/USU Conference on Small Satellites}, Logan, UT, 2024.
 \item Morgan, D., Chung, S.-J., and Hadaegh, F. Y., "Model predictive control of swarms of spacecraft using sequential convex programming," \emph{Journal of Guidance, Control, and Dynamics}, Vol. 37, No. 6, pp. 1725-1740, 2014.
 \item Ramirez-Riberos, J. L., Pavone, M., Frazzoli, E., and Miller, D. W., "Distributed control of spacecraft formations via cyclic pursuit: Theory and experiments," \emph{Journal of Guidance, Control, and Dynamics}, Vol. 33, No. 5, pp. 1655-1669, 2010.
@@ -518,6 +470,7 @@ The author gratefully acknowledges Nebula Research Lab Advisors, Shelli Brunswic
 \item Mesbahi, M., and Egerstedt, M., \emph{Graph Theoretic Methods in Multiagent Networks}, Princeton University Press, Princeton, NJ, 2010.
 \item Olfati-Saber, R., "Flocking for multi-agent dynamic systems: Algorithms and theory," \emph{IEEE Transactions on Automatic Control}, Vol. 51, No. 3, pp. 401-420, 2006.
 \item CelesTrak, "Current GP Element Sets," \url{https://celestrak.org/NORAD/elements/}. Constellation-specific JSON endpoints used in this study were \texttt{gp.php?GROUP=iridium-NEXT\&FORMAT=json}, \texttt{gp.php?GROUP=oneweb\&FORMAT=json}, and \texttt{gp.php?GROUP=starlink\&FORMAT=json}. Exact local retrieval UTC for the archived JSON files was not preserved in the current artifact bundle.
+\item Nebula Research Lab Commits, "NRL-M5-SatSim: Satellite Autonomy for Planetary Ecological Observation," GitHub repository, \url{https://github.com/nebularesearchlab-commits/NRL-M5-SatSim}.
 \item Francis, R., Estlin, T., Doran, G., Johnstone, S., Gaines, D., Verma, V., Burl, M., Frydenvang, J., Montano, S., Wiens, R. C., Schaffer, S., Gasnault, O., DeFlores, L., Blaney, D., and Bornstein, B., "AEGIS autonomous targeting for ChemCam on Mars Science Laboratory: Deployment and results of initial science team use," \emph{Science Robotics}, Vol. 2, No. 7, eaan4582, 2017. doi:10.1126/scirobotics.aan4582.
 \item Choo, T. H., Murchie, S. L., Bedini, P. D., Steele, R. J., Skura, J. P., Nguyen, L., Nair, H., Lucks, M., Berman, A. F., McGovern, J. A., and Turner, F. S., "SciBox, an end-to-end automated science planning and commanding system," \emph{Acta Astronautica}, Vol. 93, pp. 490-508, 2014.
 \item Dubovik, O., Schuster, G. L., Xu, F., Hu, Y., Bosch, H., Landgraf, J., and Li, Z., "Grand Challenges in Satellite Remote Sensing," \emph{Frontiers in Remote Sensing}, Vol. 2, 619818, 2021. doi:10.3389/frsen.2021.619818.

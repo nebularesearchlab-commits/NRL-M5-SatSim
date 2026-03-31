@@ -2,6 +2,9 @@
 
 This guide describes how to reproduce the paper outputs in this minimal bundle.
 
+Repository reference:
+`https://github.com/nebularesearchlab-commits/NRL-M5-SatSim`
+
 ## Runtime baseline
 
 - Python: 3.9+
@@ -21,6 +24,7 @@ Run `notebooks/Satellite_M5_Rerun.ipynb` in default mode to:
 1. Load existing CSV artifacts.
 2. Regenerate paper-facing figures under `results/figures/`.
 3. Verify expected artifact presence.
+4. Confirm generated visual outputs in `results/figures/` (`.png` files).
 
 ## Full rerun path (optional)
 
